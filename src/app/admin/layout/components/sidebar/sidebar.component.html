@@ -1,8 +1,12 @@
-<ul>
-  <li><a routerLink="/admin">Dashboard</a></li>
-  <li><a routerLink="customers">Customers</a></li>
-  <li><a routerLink="orders">Orders</a></li>
-  <li><a routerLink="products">Products</a></li>
-  <li><a routerLink="">Return WebSite</a></li>
-</ul>
-<router-outlet></router-outlet>
+<mat-drawer-container class="sidebar-container">
+  <mat-drawer mode="side" opened>
+    <mat-list role="list">
+      <a mat-list-item role="listitem" routerLink="/admin">Dashboard</a>
+      <a mat-list-item role="listitem" routerLink="customers">Customers</a>
+      <a mat-list-item role="listitem" routerLink="orders">Orders</a>
+      <a mat-list-item role="listitem" routerLink="products">Products</a>
+      <a mat-list-item role="listitem" routerLink="">Return Website</a>
+    </mat-list>
+  </mat-drawer>
+  <mat-drawer-content><router-outlet></router-outlet> </mat-drawer-content>
+</mat-drawer-container>
