@@ -1,0 +1,13 @@
+<mat-form-field appearance="fill">
+  <mat-label>Name</mat-label>
+  <input type="text" matInput #txtName/>
+</mat-form-field>
+<mat-form-field appearance="fill">
+  <mat-label>Stock</mat-label>
+  <input type="number" matInput #txtStock/>
+</mat-form-field>
+<mat-form-field appearance="fill">
+  <mat-label>Price</mat-label>
+  <input type="number" matInput #txtPrice/>
+</mat-form-field>
+ <button mat-raised-button color="primary" (click)="create(txtName,txtStock,txtPrice)" >Create</button>
