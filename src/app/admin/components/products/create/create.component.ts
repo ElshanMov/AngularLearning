@@ -1,5 +1,5 @@
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, SpinnerName } from 'src/app/base/base.component';
 import { CreateProduct } from 'src/app/contracts/create_product';
@@ -24,7 +24,7 @@ export class CreateComponent extends BaseComponent implements OnInit {
   ) {
     super(spinner);
   }
-
+  @Output() createdProduct: EventEmitter<CreateProduct> = new EventEmitter();
   ngOnInit(): void {}
   create(
     txtName: HTMLInputElement,
@@ -34,7 +34,7 @@ export class CreateComponent extends BaseComponent implements OnInit {
     this.showSpinner(SpinnerName.BallAtom);
     let createProduct = new CreateProduct();
     createProduct.name = txtName.value;
-    createProduct.price = parseInt(stock.value);
+    createProduct.stock = parseInt(stock.value);
     createProduct.price = parseFloat(price.value);
     this.productService.add(
       createProduct,
@@ -44,6 +44,7 @@ export class CreateComponent extends BaseComponent implements OnInit {
           position: AlertifyNotifierPosition.TopRight,
           messageType: AlertifyMessageType.Success,
         });
+        this.createdProduct.emit(createProduct);
       },
       (errorMessage) => {
         this.alertify.message(errorMessage, {

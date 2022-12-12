@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClientService } from '../http-client.service';
 import { CreateProduct } from 'src/app/contracts/create_product';
-import { BaseComponent, SpinnerName } from 'src/app/base/base.component';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ListProduct } from 'src/app/contracts/list_product';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +12,7 @@ export class ProductsService {
 
   add(
     createProduct: CreateProduct,
-    successcallback?: any,
+    successcallback?: () => void,
     errorCallBack?: (errorMessage: string) => void
   ) {
     this.httpClientService
@@ -39,5 +38,28 @@ export class ProductsService {
           errorCallBack(message);
         }
       );
+  }
+
+  async read(
+    page: number = 0,
+    size: number = 5,
+    successcallback?: () => void,
+    errorCallBack?: (errorMessage: string) => void
+  ): Promise<{ totalCount: number; products: ListProduct[] }> {
+    const promiseData: Promise<{
+      totalCount: number;
+      products: ListProduct[];
+    }> = this.httpClientService
+      .get<{ totalCount: number; products: ListProduct[] }>({
+        controller: 'products',
+        queryString: `pageIndex=${page}&pageSize=${size}`,
+      })
+      .toPromise();
+    promiseData
+      .then((d) => successcallback())
+      .catch((errorResponse: HttpErrorResponse) => {
+        errorCallBack(errorResponse.message);
+      });
+    return await promiseData;
   }
 }

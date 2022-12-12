@@ -23,15 +23,11 @@ export class AppComponent {
       position: ToastrPosition.TopRight,
       toastrType: ToastrType.Success,
     });
-    console.log('ajax');
-    $.get('https://localhost:7160/api/products', function (data: any) {
-      console.log(data);
-    });
+    // console.log('ajax');
+    // $.get('https://localhost:7160/api/products', function (data: any) {
+    //   console.log(data);
+    // });
     console.log('------------HttpClientService-----------');
-
-    this.httpClientService
-      .get<CreateProduct>({ controller: 'products' })
-      .subscribe((data) => console.log(data));
 
     // this.httpClientService
     //   .remove<Product>(
