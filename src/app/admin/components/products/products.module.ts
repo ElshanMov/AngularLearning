@@ -12,6 +12,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DeleteDirective } from 'src/app/directives/admin/delete.directive';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { DeleteDirective } from 'src/app/directives/admin/delete.directive';
     MatFormFieldModule,
     MatButtonModule,
     FontAwesomeModule,
-
+    SweetAlert2Module.forRoot(),
     RouterModule.forChild([
       {
         path: '',

@@ -33,7 +33,8 @@
               "node_modules/ngx-toastr/toastr.css",
               "node_modules/ngx-spinner/animations/ball-atom.css",
               "node_modules/ngx-spinner/animations/ball-scale-multiple.css",
-              "node_modules/ngx-spinner/animations/timer.css"
+              "node_modules/ngx-spinner/animations/timer.css",
+              "node_modules/sweetalert2/src/sweetalert2.scss"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",

@@ -8,8 +8,8 @@ import { AppComponent } from './app.component';
 import { UiModule } from './ui/ui.module';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { BaseComponent } from './base/base.component';
 import { HttpClientModule } from '@angular/common/http';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
     AdminModule,
     RouterModule,
     ToastrModule.forRoot(),
+    SweetAlert2Module.forRoot(),
     NgxSpinnerModule,
     HttpClientModule,
   ],

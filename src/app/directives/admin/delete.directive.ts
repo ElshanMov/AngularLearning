@@ -1,4 +1,3 @@
-import { HtmlParser } from '@angular/compiler';
 import {
   Directive,
   ElementRef,
@@ -10,6 +9,10 @@ import {
 } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SpinnerName } from 'src/app/base/base.component';
+import {
+  SweetAlert2Service,
+  SweetIcon,
+} from 'src/app/services/common/dialogs/sweet-alert2.service';
 import { HttpClientService } from 'src/app/services/common/http-client.service';
 declare var $: any;
 
@@ -21,7 +24,8 @@ export class DeleteDirective {
     private renderer: Renderer2,
     private element: ElementRef,
     private httpClientService: HttpClientService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private sweetAlertService: SweetAlert2Service
   ) {
     const img: HTMLImageElement = renderer.createElement('img');
     img.setAttribute('src', '../../assets/img/delete.png');
@@ -34,19 +38,39 @@ export class DeleteDirective {
   @Input() id: string;
   @Output() callback: EventEmitter<any> = new EventEmitter();
   @HostListener('click')
-  onclick() {
-    this.spinner.show(SpinnerName.BallAtom);
-    let td: HTMLTableCellElement = this.element.nativeElement;
-    this.httpClientService
-      .remove(
-        {
-          controller: 'products',
-        },
-        this.id
-      )
-      .subscribe((data) => console.log(data));
-    $(td.parentElement).fadeOut(2000, () => {
-      this.callback.emit();
-    });
+  async onclick() {
+    this.sweetAlertService.sweetAlert(
+      {
+        title: 'Are you sure want to remove?',
+        text: 'You will not be able to recover this file!',
+        icon: SweetIcon.Warning,
+        showCancelButton: true,
+        cancelButtonText: 'No, keep it',
+        confirmButtonText: 'Yes, delete it!',
+      },
+      () => {
+        this.spinner.show(SpinnerName.BallAtom);
+        let td: HTMLTableCellElement = this.element.nativeElement;
+        this.httpClientService
+          .remove(
+            {
+              controller: 'products',
+            },
+            this.id
+          )
+          .subscribe((data) => {
+            $(td.parentElement).animate(
+              {
+                opacity: 0,
+                height: 'toggle',
+              },
+              700,
+              () => {
+                this.callback.emit();
+              }
+            );
+          });
+      }
+    );
   }
 }
