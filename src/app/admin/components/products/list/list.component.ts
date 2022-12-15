@@ -30,6 +30,7 @@ export class ListComponent extends BaseComponent implements OnInit {
     'stock',
     'createdDate',
     'updatedDate',
+    'action',
   ];
   dataSource: MatTableDataSource<ListProduct> = null;
   @ViewChild(MatPaginator) paginator: MatPaginator;
