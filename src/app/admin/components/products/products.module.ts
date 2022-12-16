@@ -13,6 +13,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DeleteDirective } from 'src/app/directives/admin/delete.directive';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { FileUploadModule } from 'src/app/services/common/file-upload/file-upload.module';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     MatButtonModule,
     FontAwesomeModule,
     SweetAlert2Module.forRoot(),
+    FileUploadModule,
     RouterModule.forChild([
       {
         path: '',
